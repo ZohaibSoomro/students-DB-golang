@@ -10,6 +10,7 @@ import (
 	"github.com/zohaibsoomro/database/pkg/data"
 )
 
+// slice to hold all students' info
 var students []model.Student
 
 // loads data from the file 'fileName'
@@ -90,6 +91,8 @@ func CreateStudent(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 }
+
+// function to handle any kind of errors
 func handleError(w http.ResponseWriter, err error) {
 	if err != nil {
 		//write to browser
