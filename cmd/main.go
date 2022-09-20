@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/zohaibsoomro/database/model"
 	"github.com/zohaibsoomro/database/pkg/db"
@@ -18,7 +19,11 @@ func main() {
 	http.HandleFunc("/students/create", db.CreateStudent)
 
 	fmt.Println("Server started...")
-	handleError(http.ListenAndServe(":8080", nil))
+	port := os.Getenv("HTTP_PLATFORM_PORT")
+	if port == "" {
+		port = "8080"
+	}
+	handleError(http.ListenAndServe("127.0.0.1:"+port, nil))
 	defer fmt.Println("Server stopped")
 }
 
